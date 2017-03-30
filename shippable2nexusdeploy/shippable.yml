@@ -1,0 +1,27 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+branches:
+  only:
+    - master  
+
+env:
+  - secure: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+build:
+  ci:
+    - cd $SHIPPABLE_BUILD_DIR
+    - ls -al
+    - sed -i "s/{PASSWORD}/$PASSWORD/" .m2/settings.xml
+    - mvn -q -B -s .m2/settings.xml -U clean deploy -DskipTests
+
+
+      
+notifications:
+    - integrationName: email
+      type: email
+      on_success: never
+      on_failure: never
+      on_pull_request: never
