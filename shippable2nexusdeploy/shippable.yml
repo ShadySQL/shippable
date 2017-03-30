@@ -13,7 +13,6 @@ env:
 build:
   ci:
     - cd $SHIPPABLE_BUILD_DIR
-    - ls -al
     - sed -i "s/{PASSWORD}/$PASSWORD/" .m2/settings.xml
     - mvn -q -B -s .m2/settings.xml -U clean deploy -DskipTests
 
